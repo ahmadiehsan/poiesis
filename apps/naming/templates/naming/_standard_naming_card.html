@@ -22,6 +22,13 @@
                         {{ name }}
                     </p>
                 {% endfor %}
+
+                {% if help_code %}
+                    <hr>
+                    <div class="bg-dark rounded-2 text-white p-3">
+                        {{ help_code|safe }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
