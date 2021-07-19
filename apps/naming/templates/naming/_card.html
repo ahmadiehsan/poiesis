@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="card mb-4">
-    <a href="{% url url_name %}">
+    <a href="{% url 'naming:entity' %}?next={% url next_url %}">
         <img src="{% static image_address %}" class="card-img-top" alt="react">
     </a>
     <div class="card-body">
@@ -12,7 +12,7 @@
             استاندارد نام گذاری در
             {{ title }}
         </p>
-        <a href="{% url url_name %}" class="btn btn-primary">
+        <a href="{% url 'naming:entity' %}?next={% url next_url %}" class="btn btn-primary">
             کلیک کنید
         </a>
     </div>
