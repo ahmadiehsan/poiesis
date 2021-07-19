@@ -1,0 +1,14 @@
+.btn-primary {
+    background-color: #5c6ac4;
+    border-color: #5c6ac4;
+}
+
+.jq-toast-single {
+    font-size: 14px !important;
+    text-align: right !important;
+}
+
+.close-jq-toast-single {
+    right: auto !important;
+    left: 7px !important;
+}

@@ -1,0 +1,12 @@
+.standard_naming_card .card-text .copy-button {
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.standard_naming_card .card-text:hover .copy-button {
+    opacity: 1;
+}
+
+.standard_naming_card .card-text:hover {
+    color: #0a53be;
+}

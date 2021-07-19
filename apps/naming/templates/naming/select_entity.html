@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    استاندارد نام گذاری در ری‌اکت
+    انتخاب Entity
 {% endblock %}
 
 {% block css %}
@@ -13,9 +13,8 @@
     <div class="container">
         <div class="d-flex justify-content-center align-items-center" style="min-height: 350px">
             <form action="{{ request.GET.next }}" method="get">
-                <label>
-                    <input class="huge-input" type="text" name="entity" placeholder="نام Entity را وارد نمایید">
-                </label>
+                <input autocomplete="off" class="huge-input" type="text" name="entity" required pattern="[A-Za-z]*"
+                       placeholder="نام انگلیسی Entity را وارد نمایید + enter">
             </form>
         </div>
     </div>

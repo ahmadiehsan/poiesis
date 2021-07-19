@@ -9,14 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.rtl.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'jquery-toast-plugin/dist/jquery.toast.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '@fortawesome/fontawesome-free/css/all.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main_app/css/area.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main_app/css/override.css' %}">
     {% block css %}{% endblock %}
 
     <title>Poiesis | {% block title %}{% endblock %}</title>
 </head>
-<body>
+<body class="pb-5">
 
-<div class="area position-absolute">
+<div class="area position-fixed">
     <ul class="circles">
         <li></li>
         <li></li>
@@ -44,11 +47,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'naming:select-framework' %}">
-                        انتخاب فریمورک
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="https://en.wikipedia.org/wiki/Poiesis" target="_blank">
                         درباره پوئیسیس
                     </a>
@@ -65,6 +63,13 @@
 
 <script src="{% static 'jquery/dist/jquery.js' %}"></script>
 <script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'jquery-toast-plugin/dist/jquery.toast.min.js' %}"></script>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 {% block js %}{% endblock %}
 
 </html>

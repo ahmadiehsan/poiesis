@@ -1,0 +1,52 @@
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'naming/css/standard_naming_card.css' %}">
+{% endblock %}
+
+<div class="row no-gutters">
+
+    {% if align == 'left' %}
+        <div class="col-lg"></div>
+        {% include 'naming/_center_dot.html' %}
+    {% endif %}
+
+    <div class="col-lg py-2">
+        <div class="card shadow-sm standard_naming_card" style="direction: ltr">
+            <div class="card-body">
+                <h4 class="card-title text-primary mb-3">{{ scope }}</h4>
+                {% for name in names %}
+                    <p class="card-text mb-1" onclick="copyToClipboard(this)" style="cursor: pointer"
+                       data-bs-toggle="tooltip" data-bs-placement="right" title="برای کپی کلیک کنید">
+                        <span class="fa fa-copy copy-button"></span>
+                        {{ name }}
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% if align == 'right' %}
+        {% include 'naming/_center_dot.html' %}
+        <div class="col-lg"></div>
+    {% endif %}
+
+</div>
+
+{% block js %}
+    <script>
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+
+            $.toast({
+                text: `${$(element).text()} <br> با موفقیت کپی شد!!!`,
+                loader: false,
+                position: 'top-right',
+            })
+        }
+    </script>
+{% endblock %}
