@@ -1,0 +1,19 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}
+    انتخاب فریمورک
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row offset-lg-2">
+            <div class="col-sm-6 col-lg-4">
+                {% include 'naming/_card.html' with image_address='naming/images/react.jpg' title='ری‌اکت' url_name='naming:react' %}
+            </div>
+            <div class="col-sm-6 col-lg-4 offset-lg-2">
+                {% include 'naming/_card.html' with image_address='naming/images/python.jpg' title='پایتون' url_name='naming:python' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

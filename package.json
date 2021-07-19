@@ -1,0 +1,21 @@
+{
+  "name": "poiesis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.0.2",
+    "iransans": "^1.0.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://mgit.mparsict.com/ahmadiehsan/poiesis.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

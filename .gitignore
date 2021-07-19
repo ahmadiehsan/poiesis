@@ -1,4 +1,7 @@
 ### Example user template
+# JS files
+node_modules
+
 # IntelliJ project files
 .idea
 *.iml
