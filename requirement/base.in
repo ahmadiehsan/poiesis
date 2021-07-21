@@ -1,1 +1,2 @@
 Django==3.2.5
+django_node_assets==0.9.9
