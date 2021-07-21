@@ -10,6 +10,8 @@ click==8.0.1
     # via pip-tools
 django==3.2.5
     # via -r requirement/base.in
+django-environ==0.4.5
+    # via -r requirement/base.in
 django_node_assets==0.9.9
     # via -r requirement/base.in
 importlib-metadata==4.6.1

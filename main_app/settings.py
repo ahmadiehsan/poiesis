@@ -3,14 +3,20 @@ import locale
 import os
 from pathlib import Path
 
+import environ
 from django.core.exceptions import ImproperlyConfigured
+
+env = environ.Env()
+environ.Env.read_env()
 
 
 def get_env_value(env_variable, default_value=None):
     try:
         return os.environ[env_variable]
     except KeyError:
-        if default_value:
+        if env.get_value(env_variable):
+            return env.get_value(env_variable)
+        elif default_value:
             return default_value
         else:
             error_msg = 'Please set the {} environment variable'.format(env_variable)

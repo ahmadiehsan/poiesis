@@ -8,6 +8,8 @@ asgiref==3.4.1
     # via django
 django==3.2.5
     # via -r requirement/base.in
+django-environ==0.4.5
+    # via -r requirement/base.in
 django_node_assets==0.9.9
     # via -r requirement/base.in
 gunicorn==20.1.0
