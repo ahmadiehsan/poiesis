@@ -1,16 +1,31 @@
+import json
 import locale
+import os
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_value(env_variable, default_value=None):
+    try:
+        return os.environ[env_variable]
+    except KeyError:
+        if default_value:
+            return default_value
+        else:
+            error_msg = 'Please set the {} environment variable'.format(env_variable)
+            raise ImproperlyConfigured(error_msg)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qtgx_e=(7o=xz7)$d)g8#x*sp10ivw%&u!e!lc+48w3=5ex17r'
+SECRET_KEY = get_env_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = json.loads(get_env_value('DEBUG', False))
+ALLOWED_HOSTS = get_env_value('ALLOWED_HOSTS', '*').replace(', ', ',').replace(' ,', ',').split(',')
 
 # Application definition
 
