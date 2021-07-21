@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_env_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = json.loads(get_env_value('DEBUG', False))
+DEBUG = json.loads(get_env_value('DEBUG', 'false'))
 ALLOWED_HOSTS = get_env_value('ALLOWED_HOSTS', '*').replace(', ', ',').replace(' ,', ',').split(',')
 
 # Application definition
