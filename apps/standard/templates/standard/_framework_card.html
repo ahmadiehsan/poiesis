@@ -1,0 +1,45 @@
+{% load static %}
+
+<div class="card mb-4" onclick="showPulse(this)">
+    <img src="{% static image_address %}" class="card-img-top" alt="react">
+    <div class="card-body">
+        <h5 class="card-title">
+            {{ title }}
+        </h5>
+        <p class="card-text">
+            استانداردهای
+            {{ title }}
+            برای:
+        </p>
+
+        {% if naming_url_name %}
+            <a href="{% url naming_url_name %}" class="btn btn-primary btn-sm">
+                نام گذاری
+                <span class="pulse"></span>
+            </a>
+        {% endif %}
+
+        {% if coding_url_name %}
+            <a href="{% url coding_url_name %}" class="btn btn-primary btn-sm">
+                کد نویسی
+                <span class="pulse"></span>
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+{% block js %}
+    <script>
+        function showPulse(element) {
+            let buttons = element.getElementsByClassName('btn');
+            for (const [index, button] of Array.from(buttons).entries()) {
+                setTimeout(() => {
+                    $(button).addClass('show-pulse');
+                }, 150 * index);
+                setTimeout(() => {
+                    $(button).removeClass('show-pulse');
+                }, 200 * (index + 1));
+            }
+        }
+    </script>
+{% endblock %}

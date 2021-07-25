@@ -1,12 +1,14 @@
 from django.views.generic import TemplateView
 
+from main_app.settings import BASE_DIR
+
 
 class SelectFrameworkView(TemplateView):
-    template_name = 'naming/select_framework.html'
+    template_name = 'standard/select_framework.html'
 
 
-class ReactView(TemplateView):
-    template_name = 'naming/standard_naming.html'
+class NamingReactView(TemplateView):
+    template_name = 'standard/naming.html'
 
     @staticmethod
     def _generate_pages(entity):
@@ -104,8 +106,8 @@ class ReactView(TemplateView):
         return context
 
 
-class DjangoView(TemplateView):
-    template_name = 'naming/standard_naming.html'
+class NamingDjangoView(TemplateView):
+    template_name = 'standard/naming.html'
 
     @staticmethod
     def _generate_models(entity):
@@ -174,5 +176,21 @@ class DjangoView(TemplateView):
             'title_en': 'Django',
             'title_fa': 'جنگو'
         })
+
+        return context
+
+
+class CodingReactView(TemplateView):
+    template_name = 'standard/coding.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        with open(BASE_DIR / 'apps' / 'standard' / 'templates' / 'standard' / '_react_coding_rules.html', 'r') as file:
+            context.update({
+                'title_en': 'React',
+                'title_fa': 'ری‌اکت',
+                'text': file.read()
+            })
 
         return context

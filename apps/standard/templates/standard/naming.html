@@ -7,13 +7,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container py-2 mt-4 mb-4">
-        <h3 class="text-center">
-            {{ title_fa }}
-            -
-            {{ title_en }}
+    <div class="container">
+        <h3 class="text-center mb-4">
+            {{ title_fa }} - {{ title_en }}
+            <span class="text-muted fs-5">(نام گذاری)</span>
         </h3>
-        <div class="text-center pt-3 pb-5">
+        <div class="text-center pb-5">
             <label for="entity_input">نام Entity:</label>
             <form action="" method="get" class="d-inline-block ms-2">
                 <div class="input-group">
@@ -29,9 +28,9 @@
                 <div class="col-lg-10 offset-lg-1">
                     {% for rule, value in rules.items %}
                         {% if forloop.counter|divisibleby:2 %}
-                            {% include 'naming/_standard_naming_card.html' with align='right' scope=rule names=value.names help_code=value.help_code %}
+                            {% include 'standard/_naming_card.html' with align='right' scope=rule names=value.names help_code=value.help_code %}
                         {% else %}
-                            {% include 'naming/_standard_naming_card.html' with align='left' scope=rule names=value.names help_code=value.help_code %}
+                            {% include 'standard/_naming_card.html' with align='left' scope=rule names=value.names help_code=value.help_code %}
                         {% endif %}
                     {% endfor %}
                 </div>

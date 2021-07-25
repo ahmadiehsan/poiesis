@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'main_app',
-    'apps.naming',
+    'apps.standard',
 
     'django_node_assets',
 ]
@@ -116,7 +116,7 @@ LOCALE_PATHS = (BASE_DIR / 'locale',)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'main_app' / 'static',
-    BASE_DIR / 'apps' / 'naming' / 'static',
+    BASE_DIR / 'apps' / 'standard' / 'static',
 ]
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_FINDERS = [

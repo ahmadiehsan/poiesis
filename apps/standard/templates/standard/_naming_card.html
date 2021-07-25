@@ -1,14 +1,14 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'naming/css/standard_naming_card.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'standard/css/standard_naming_card.css' %}">
 {% endblock %}
 
 <div class="row no-gutters">
 
     {% if align == 'left' %}
         <div class="col-lg"></div>
-        {% include 'naming/_center_dot.html' %}
+        {% include 'standard/_center_dot.html' %}
     {% endif %}
 
     <div class="col-lg py-2">
@@ -34,7 +34,7 @@
     </div>
 
     {% if align == 'right' %}
-        {% include 'naming/_center_dot.html' %}
+        {% include 'standard/_center_dot.html' %}
         <div class="col-lg"></div>
     {% endif %}
 

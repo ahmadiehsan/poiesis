@@ -1,0 +1,56 @@
+<ol class="spaced-list-lg">
+    <li>
+        ترتیب کد در کامپوننت به شکل زیر باشد:
+        <code>
+            <div>Props</div>
+            <div>Internal State</div>
+            <div>Redux</div>
+            <div>Hooks</div>
+            <div>Handle functions</div>
+            <div>UseEffect</div>
+            <div>return</div>
+        </code>
+    </li>
+    <li>
+        کد یا کامپوننت مورد نظر فقط در صورتی در فولدر Framework قرار بگیرد که در باقی App ها به آن نیاز است.
+    </li>
+    <li>
+        در import کردن از فولدر Framework همیشه path آن absolute باشد. برای مثال:
+        <code>
+            framework/helpers/constants
+        </code>
+    </li>
+    <li>
+        در import کردن از App داخلی همیشه path آن relative باشد. برای مثال:
+        <code>
+            ../state/actions
+        </code>
+    </li>
+    <li>
+        برای تمام string ها در قسمت import از " (Quotation mark) استفاده شود. برای string های به غیر از این بخش از '
+        (Apostrophe) استفاده شود.
+    </li>
+    <li>
+        برای نام گذاری صفحات، Action Creator ها، Action Type ها، و Reducer از
+        <a href="/standard/naming/react" target="_blank">این لینک</a>
+        استفاده شود.
+    </li>
+    <li>
+        فقط در صورتی که Action شامل گرفتن دیتا با API نمی‌شود می‌توان از actionTypeGenerator برای نامگذاری Action type
+        استفاده ننمود.
+    </li>
+    <li>
+        برای Action های دارای تعامل با API که شامل گرفتن دیتا و یا ساخت و ویرایش آن می‌شود می بایست از Loading استفاده
+        شود.
+    </li>
+    <li>
+        برای نشان دادن آنکه کاربر نیاز به صبر کردن دارد باید از Spinner استفاده شود.
+    </li>
+    <li>
+        برای تمام لینک و موارد کلیک کردنی، برای حالت هاور می بایست تغییر قابل مشاهده‌ای در المان وجود داشته باشد. (مانند
+        تغییر رنگ در آن)
+    </li>
+    <li>
+        در زمان حذف یک مورد حتما باید warning به کاربر نمایش داده شود تا با تایید آن حذف انجام گیرد.
+    </li>
+</ol>
