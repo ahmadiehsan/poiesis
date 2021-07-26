@@ -16,11 +16,15 @@
             <div class="card-body">
                 <h4 class="card-title text-primary mb-3">{{ scope }}</h4>
                 {% for name in names %}
-                    <p class="card-text mb-1" onclick="copyToClipboard(this)" style="cursor: pointer"
-                       data-bs-toggle="tooltip" data-bs-placement="right" title="برای کپی کلیک کنید">
-                        <span class="fa fa-copy copy-button"></span>
-                        {{ name }}
-                    </p>
+                    {% if name == '---' %}
+                        <hr>
+                    {% else %}
+                        <p class="card-text mb-1" onclick="copyToClipboard(this)" style="cursor: pointer"
+                           data-bs-toggle="tooltip" data-bs-placement="right" title="برای کپی کلیک کنید">
+                            <span class="fa fa-copy copy-button"></span>
+                            {{ name }}
+                        </p>
+                    {% endif %}
                 {% endfor %}
 
                 {% if help_code %}

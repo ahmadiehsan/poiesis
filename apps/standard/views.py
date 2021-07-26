@@ -1,3 +1,5 @@
+import re
+
 from django.views.generic import TemplateView
 
 from main_app.settings import BASE_DIR
@@ -16,6 +18,7 @@ class NamingReactView(TemplateView):
             [
                 f'{entity}FormPage.js',
                 f'{entity}SinglePage.js',
+                '---',
                 f'{entity}ListPage.js',
             ],
             ''
@@ -27,21 +30,26 @@ class NamingReactView(TemplateView):
             [
                 f'{entity}Create = () => {{}};',
                 f'{entity}Get = () => {{}};',
-                f'{entity}List = () => {{}};',
                 f'{entity}Delete = () => {{}};',
                 f'{entity}Update = () => {{}};',
+                '---',
+                f'{entity}List = () => {{}};',
             ],
             ''
         )
 
     @staticmethod
     def _generate_action_types(entity):
-        action_type = f'{entity.upper()}_TYPES'
+        action_type = f"{re.sub(r'(?<!^)(?=[A-Z])', '_', entity).upper()}_TYPES"
         return (
             [
                 f'{action_type}.get',
                 f'{action_type}.loading',
                 f'{action_type}.error',
+                f'{action_type}.create',
+                f'{action_type}.delete',
+                f'{action_type}.update',
+                '---',
                 f'{action_type}.list.get',
                 f'{action_type}.list.loading',
                 f'{action_type}.list.error',
@@ -60,6 +68,7 @@ class NamingReactView(TemplateView):
                 f'{entity}.data',
                 f'{entity}.isLoading',
                 f'{entity}.error',
+                '---',
                 f'{entity}.list.data',
                 f'{entity}.list.isLoading',
                 f'{entity}.list.error',
@@ -86,6 +95,7 @@ class NamingReactView(TemplateView):
 
             context.update({
                 'entity': entity,
+                'help_image': 'standard/images/react_entity_base.jpg',
                 'rules': {
                     'Pages': {'names': pages_names, 'help_code': pages_help_code},
                     'Actions (Action Creators)': {'names': actions_names, 'help_code': actions_help_code},

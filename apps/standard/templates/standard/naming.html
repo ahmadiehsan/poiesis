@@ -17,15 +17,15 @@
             <form action="" method="get" class="d-inline-block ms-2">
                 <div class="input-group">
                     <input class="form-control" type="text" id="entity_input" name="entity" value="{{ entity }}"
-                           required pattern="[A-Za-z]*" placeholder="انگلیسی و به هم چسبیده">
+                           required pattern="[A-Za-z]*" placeholder="مثلا: userMembership">
                     <button class="btn btn-primary" type="submit">تولید</button>
                 </div>
             </form>
         </div>
 
-        {% if entity %}
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                {% if entity %}
                     {% for rule, value in rules.items %}
                         {% if forloop.counter|divisibleby:2 %}
                             {% include 'standard/_naming_card.html' with align='right' scope=rule names=value.names help_code=value.help_code %}
@@ -33,12 +33,16 @@
                             {% include 'standard/_naming_card.html' with align='left' scope=rule names=value.names help_code=value.help_code %}
                         {% endif %}
                     {% endfor %}
-                </div>
+
+                    {% if help_image %}
+                        <img src="{% static help_image %}" class="img-fluid img-thumbnail mt-5" alt="help image">
+                    {% endif %}
+                {% else %}
+                    <div class="text-center pt-5 mt-5">
+                        <p>هنوز هیچ Entity ای وارد نشده است !!!</p>
+                    </div>
+                {% endif %}
             </div>
-        {% else %}
-            <div class="text-center pt-5 mt-5">
-                <p>هنوز هیچ Entity ای وارد نشده است !!!</p>
-            </div>
-        {% endif %}
+        </div>
     </div>
 {% endblock %}
