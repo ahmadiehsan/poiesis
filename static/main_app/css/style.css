@@ -33,6 +33,18 @@ dl, ol, ul {
     margin-top: 30px;
 }
 
+.spaced-list-md > li + li {
+    margin-top: 20px;
+}
+
+.spaced-list-sm > li + li {
+    margin-top: 10px;
+}
+
+.box-title {
+    margin-top: 25px;
+}
+
 code {
     display: block;
     direction: ltr;
