@@ -28,12 +28,12 @@ class NamingReactView(TemplateView):
     def _generate_actions(entity):
         return (
             [
-                f'{entity}Create = () => {{}};',
-                f'{entity}Get = () => {{}};',
-                f'{entity}Delete = () => {{}};',
-                f'{entity}Update = () => {{}};',
+                f'{entity}Create',
+                f'{entity}Get',
+                f'{entity}Delete',
+                f'{entity}Update',
                 '---',
-                f'{entity}List = () => {{}};',
+                f'{entity}List',
             ],
             ''
         )
