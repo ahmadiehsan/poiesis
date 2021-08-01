@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block title %}
-    استاندارد کدنویسی در
+    استاندارد
+    {{ standard_name }}
+    در
     {{ title_fa }}
 {% endblock %}
 
@@ -10,7 +12,7 @@
     <div class="container">
         <h3 class="text-center mb-4">
             {{ title_fa }} - {{ title_en }}
-            <span class="text-muted fs-5">(کدنویسی)</span>
+            <span class="text-muted fs-5">({{ standard_name }})</span>
         </h3>
 
         <div class="row">

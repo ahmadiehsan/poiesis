@@ -191,7 +191,7 @@ class NamingDjangoView(TemplateView):
 
 
 class CodingReactView(TemplateView):
-    template_name = 'standard/coding.html'
+    template_name = 'standard/html_text.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -200,6 +200,24 @@ class CodingReactView(TemplateView):
             context.update({
                 'title_en': 'React',
                 'title_fa': 'ری‌اکت',
+                'standard_name': 'کدنویسی',
+                'text': file.read()
+            })
+
+        return context
+
+
+class TestingReactView(TemplateView):
+    template_name = 'standard/html_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        with open(BASE_DIR / 'apps' / 'standard' / 'templates' / 'standard' / '_react_testing_rules.html', 'r') as file:
+            context.update({
+                'title_en': 'React',
+                'title_fa': 'ری‌اکت',
+                'standard_name': 'تست کردن',
                 'text': file.read()
             })
 
