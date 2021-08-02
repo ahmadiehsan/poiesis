@@ -2,6 +2,10 @@
     line-height: 30px;
 }
 
+a {
+    color: #0a53be;
+}
+
 .btn {
     position: relative;
 }
@@ -52,4 +56,16 @@ code {
     padding: 5px 10px;
     background: #fafafa;
     border-radius: 5px;
+}
+
+li .index-link {
+    position: absolute;
+    right: 9px;
+    font-size: 13px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+li:hover .index-link {
+    opacity: 1;
 }
