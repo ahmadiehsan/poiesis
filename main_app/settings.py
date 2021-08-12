@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'main_app',
     'apps.standard',
+    'apps.user',
 
     'django_node_assets',
 ]
@@ -129,3 +130,41 @@ NODE_MODULES_ROOT = BASE_DIR / 'node_modules'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Default user model
+AUTH_USER_MODEL = 'user.User'
+
+# Log
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}\n',
+            'style': '{'
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{'
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+            'level': 'WARNING',
+        },
+    },
+    'loggers': {
+        'suds': {
+            'handlers': [],
+            'propagate': True,
+            'level': 'CRITICAL',
+        },
+        '': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    },
+}

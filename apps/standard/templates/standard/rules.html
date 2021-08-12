@@ -25,7 +25,24 @@
             <div class="col-lg-10 offset-lg-1">
                 <div class="card shadow-sm">
                     <div class="card-body page-content">
-                        {{ text|safe }}
+                        {% for rule_topic in rule_topics %}
+                            <h4 class="box-title">
+                                {{ rule_topic.title }}
+                            </h4>
+                            <ol class="spaced-list-sm">
+                                {% for rule_item in rule_topic.items.all %}
+                                    <li
+                                            id="{{ rule_item.id }}"
+                                            class="{{ rule_item.get_item_type_display }} {% if rule_item.is_new %}new{% endif %}"
+                                    >
+                                        <a href="#{{ rule_item.id }}" class="index-link">
+                                            <span class="fa fa-link"></span>
+                                        </a>
+                                        {{ rule_item.content|safe }}
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -35,11 +52,6 @@
 
 {% block js %}
     <script>
-        for (const [index, element] of Array.from($('.page-content li')).entries()) {
-            $(element).attr('id', index);
-            $(element).prepend(`<a href="#${index}" class="index-link"><span class="fa fa-link"></span></a>`);
-        }
-
         function doFilter(element, entry) {
             $('.filter-btns .btn').removeClass('active');
             $(element).addClass('active');
