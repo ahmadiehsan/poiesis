@@ -1,15 +1,43 @@
 import re
+from copy import deepcopy
 
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 
 from .models import RuleTopic
+from .services import AnalysisService
 
 
 class SelectFrameworkView(TemplateView):
     template_name = 'standard/select_framework.html'
 
 
-class NamingReactView(TemplateView):
+class AnalysisFileGeneratorMixin:
+    def _get_clean_POST_data(self, request):
+        data = deepcopy(request.POST)
+        del data['csrfmiddlewaretoken']
+        return data
+
+    def post(self, request):
+        standard_table_content = ['فایل/مفهوم', 'مقدار']
+        standard_dict = {}
+        for scope in self._get_clean_POST_data(request):
+            for value in request.POST.getlist(scope):
+                standard_table_content.extend([scope, value])
+                standard_dict.setdefault(scope, []).append(value)
+
+        service = AnalysisService()
+        service.fill_file_with_default_content(standard_table_content, standard_dict)
+
+        response = HttpResponse(
+            service.read_file(),
+            content_type='text/markdown',
+            headers={'Content-Disposition': f'attachment; filename="analysis_{request.GET["entity"]}.md"'},
+        )
+        return response
+
+
+class NamingReactView(TemplateView, AnalysisFileGeneratorMixin):
     template_name = 'standard/naming.html'
 
     @staticmethod
@@ -110,13 +138,14 @@ class NamingReactView(TemplateView):
 
         context.update({
             'title_en': 'React',
-            'title_fa': 'ری‌اکت'
+            'title_fa': 'ری‌اکت',
+            'analysis_mode': True if self.request.GET.get('analysis-mode') == 'on' else False
         })
 
         return context
 
 
-class NamingDjangoView(TemplateView):
+class NamingDjangoView(TemplateView, AnalysisFileGeneratorMixin):
     template_name = 'standard/naming.html'
 
     @staticmethod
@@ -184,7 +213,8 @@ class NamingDjangoView(TemplateView):
 
         context.update({
             'title_en': 'Django',
-            'title_fa': 'جنگو'
+            'title_fa': 'جنگو',
+            'analysis_mode': True if self.request.GET.get('analysis-mode') == 'on' else False
         })
 
         return context

@@ -13,6 +13,13 @@
         </p>
 
         {% if naming_url_name %}
+            <a href="{% url naming_url_name %}?analysis-mode=on" class="btn btn-primary btn-sm">
+                تحلیل
+                <span class="pulse"></span>
+            </a>
+        {% endif %}
+
+        {% if naming_url_name %}
             <a href="{% url naming_url_name %}" class="btn btn-primary btn-sm">
                 نام گذاری
                 <span class="pulse"></span>
@@ -21,7 +28,7 @@
 
         {% if rules_url_name %}
             <a href="{% url rules_url_name %}" class="btn btn-primary btn-sm">
-                کد نویسی و تست
+                کد و تست
                 <span class="pulse"></span>
             </a>
         {% endif %}

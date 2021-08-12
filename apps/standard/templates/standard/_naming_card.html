@@ -21,11 +21,25 @@
                     {% if name == '---' %}
                         <hr>
                     {% else %}
-                        <p class="card-text mb-1" onclick="copyToClipboard(this)" style="cursor: pointer"
-                           data-bs-toggle="tooltip" data-bs-placement="right" title="برای کپی کلیک کنید">
-                            <span class="fa fa-copy copy-button"></span>
-                            {{ name }}
-                        </p>
+                        {% if analysis_mode %}
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input
+                                            class="form-check-input float-end ms-2"
+                                            type="checkbox"
+                                            name="{{ scope }}"
+                                            value="{{ name }}"
+                                    >
+                                    {{ name }}
+                                </label>
+                            </div>
+                        {% else %}
+                            <p class="card-text mb-1" onclick="copyToClipboard(this)" style="cursor: pointer"
+                               data-bs-toggle="tooltip" data-bs-placement="right" title="برای کپی کلیک کنید">
+                                <span class="fa fa-copy copy-button"></span>
+                                {{ name }}
+                            </p>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
 

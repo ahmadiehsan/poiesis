@@ -12,12 +12,25 @@
             {{ title_fa }} - {{ title_en }}
             <span class="text-muted fs-5">(نام گذاری)</span>
         </h3>
-        <div class="text-center pb-5">
+        <div class="text-center pb-3">
             <label for="entity_input">نام Entity:</label>
             <form action="" method="get" class="d-inline-block ms-2">
                 <div class="input-group">
-                    <input class="form-control" type="text" id="entity_input" name="entity" value="{{ entity }}"
-                           required pattern="[A-Za-z]*" placeholder="مثلا: userMembership">
+                    {% for key, value in request.GET.items %}
+                        {% if not key == 'entity' %}
+                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                        {% endif %}
+                    {% endfor %}
+                    <input
+                            class="form-control"
+                            type="text"
+                            id="entity_input"
+                            name="entity"
+                            value="{{ entity }}"
+                            required
+                            pattern="[A-Za-z]*"
+                            placeholder="مثلا: userMembership"
+                    >
                     <button class="btn btn-primary" type="submit">تولید</button>
                 </div>
             </form>
@@ -26,17 +39,46 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 {% if entity %}
-                    {% for rule, value in rules.items %}
-                        {% if forloop.counter|divisibleby:2 %}
-                            {% include 'standard/_naming_card.html' with align='right' scope=rule names=value.names help_code=value.help_code %}
-                        {% else %}
-                            {% include 'standard/_naming_card.html' with align='left' scope=rule names=value.names help_code=value.help_code %}
-                        {% endif %}
-                    {% endfor %}
+                    <form action="" method="post">
+                        {% csrf_token %}
 
-                    {% if help_image %}
-                        <img src="{% static help_image %}" class="img-fluid img-thumbnail mt-5" alt="help image">
-                    {% endif %}
+                        <div class="text-center text-md-start">
+                            {% if analysis_mode %}
+                                <button
+                                        type="button"
+                                        onclick="switchAnalysisMode('off')"
+                                        class="btn btn-outline-danger"
+                                >
+                                    خروج از مود
+                                </button>
+                                <button type="submit" class="btn btn-primary">دانلود فایل تحلیل</button>
+                                <div class="alert alert-primary mt-3">
+                                    در این مود، با تیک زدن از میان گزینه‌های زیر و کلیک بر روی دکمه بالا (دانلود فایل
+                                    تحلیل) یک فایل در سیستم شما دانلود خواهد شد
+                                </div>
+                            {% else %}
+                                <button
+                                        type="button"
+                                        onclick="switchAnalysisMode('on')"
+                                        class="btn btn-outline-primary"
+                                >
+                                    سویچ به مود تولید فایل تحلیل
+                                </button>
+                            {% endif %}
+                        </div>
+
+                        {% for rule, value in rules.items %}
+                            {% if forloop.counter|divisibleby:2 %}
+                                {% include 'standard/_naming_card.html' with align='right' scope=rule names=value.names help_code=value.help_code %}
+                            {% else %}
+                                {% include 'standard/_naming_card.html' with align='left' scope=rule names=value.names help_code=value.help_code %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if help_image %}
+                            <img src="{% static help_image %}" class="img-fluid img-thumbnail mt-5" alt="help image">
+                        {% endif %}
+                    </form>
                 {% else %}
                     <div class="text-center pt-5 mt-5">
                         <p>هنوز هیچ Entity ای وارد نشده است !!!</p>
@@ -45,4 +87,26 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        function updateQueryStringParameter(uri, key, value) {
+            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            } else {
+                return uri + separator + key + "=" + value;
+            }
+        }
+
+        function switchAnalysisMode(switch_to) {
+            if (switch_to === 'on') {
+                document.location = updateQueryStringParameter(window.location.href, 'analysis-mode', 'on');
+            } else if (switch_to === 'off') {
+                document.location = updateQueryStringParameter(window.location.href, 'analysis-mode', 'off');
+            }
+        }
+    </script>
 {% endblock %}
