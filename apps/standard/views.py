@@ -190,34 +190,38 @@ class NamingDjangoView(TemplateView):
         return context
 
 
-class CodingReactView(TemplateView):
-    template_name = 'standard/html_text.html'
+class CodingAndTestingReactView(TemplateView):
+    template_name = 'standard/coding_and_testing_layout.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        with open(BASE_DIR / 'apps' / 'standard' / 'templates' / 'standard' / '_react_coding_rules.html', 'r') as file:
+        with open(
+                BASE_DIR / 'apps' / 'standard' / 'templates' / 'standard' / '_react_coding_and_testing_rules.html',
+                'r'
+        ) as file:
             context.update({
                 'title_en': 'React',
                 'title_fa': 'ری‌اکت',
-                'standard_name': 'کدنویسی',
                 'text': file.read()
             })
 
         return context
 
 
-class TestingReactView(TemplateView):
-    template_name = 'standard/html_text.html'
+class CodingAndTestingDjangoView(TemplateView):
+    template_name = 'standard/coding_and_testing_layout.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        with open(BASE_DIR / 'apps' / 'standard' / 'templates' / 'standard' / '_react_testing_rules.html', 'r') as file:
+        with open(
+                BASE_DIR / 'apps' / 'standard' / 'templates' / 'standard' / '_django_coding_and_testing_rules.html',
+                'r'
+        ) as file:
             context.update({
-                'title_en': 'React',
-                'title_fa': 'ری‌اکت',
-                'standard_name': 'تست کردن',
+                'title_en': 'Django',
+                'title_fa': 'جنگو',
                 'text': file.read()
             })
 

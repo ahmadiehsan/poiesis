@@ -22,7 +22,6 @@
     background: #d7d8ff;
     animation: animate 25s linear infinite;
     bottom: -150px;
-
 }
 
 .circles li:nth-child(1) {

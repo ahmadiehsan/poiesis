@@ -1,0 +1,74 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}
+    استاندارد کدنویسی و تست در
+    {{ title_fa }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3 class="text-center mb-4">
+            {{ title_fa }} - {{ title_en }}
+            <span class="text-muted fs-5">(کدنویسی و تست)</span>
+
+            <div class="mt-3">
+                <div class="btn-group filter-btns">
+                    <button onclick="doFilter(this, 'all')" class="btn btn-outline-primary active">همه</button>
+                    <button onclick="doFilter(this, 'coding')" class="btn btn-outline-primary">قوانین کد نویسی</button>
+                    <button onclick="doFilter(this, 'testing')" class="btn btn-outline-primary">قوانین تست</button>
+                </div>
+            </div>
+        </h3>
+
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="card shadow-sm">
+                    <div class="card-body page-content">
+                        {{ text|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        for (const [index, element] of Array.from($('.page-content li')).entries()) {
+            $(element).attr('id', index);
+            $(element).prepend(`<a href="#${index}" class="index-link"><span class="fa fa-link"></span></a>`);
+        }
+
+        function doFilter(element, entry) {
+            $('.filter-btns .btn').removeClass('active');
+            $(element).addClass('active');
+
+            if (entry === 'all') {
+                $('.page-content li.coding').removeClass('d-none');
+                $('.page-content li.testing').removeClass('d-none');
+            } else if (entry === 'coding') {
+                $('.page-content li.testing').addClass('d-none');
+                $('.page-content li.coding').removeClass('d-none');
+            } else if (entry === 'testing') {
+                $('.page-content li.testing').removeClass('d-none');
+                $('.page-content li.coding').addClass('d-none');
+            }
+
+            for (const boxTitleElement of $('.box-title')) {
+                let i = 0;
+                for (const boxLiElement of $(boxTitleElement).next().children()) {
+                    if (!$(boxLiElement).hasClass('d-none')) {
+                        i += 1;
+                        break;
+                    }
+                }
+                if (i === 0) {
+                    $(boxTitleElement).addClass('d-none');
+                } else {
+                    $(boxTitleElement).removeClass('d-none');
+                }
+            }
+        }
+    </script>
+{% endblock %}

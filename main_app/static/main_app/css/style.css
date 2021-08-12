@@ -72,15 +72,14 @@ li:hover .index-link {
 
 .new:before {
     content: "NEW";
-    background: linear-gradient(
--45deg
-, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #d62aff, #5845e3, #6d63ef, #9192ff);
     background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    animation: gradient 5s ease infinite;
     color: #fff;
-    padding: 4px 10px 1px;
+    padding: 3px 6px 0;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 @keyframes gradient {

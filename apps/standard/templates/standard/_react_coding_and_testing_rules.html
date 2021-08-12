@@ -2,21 +2,32 @@
     نکات کلی
 </h4>
 <ol class="spaced-list-sm">
-    <li>
+    <li class="coding">
         کد ما هیچ یک از بخش‌های سامانه را نباید دچار ایراد نماید و در صورتی که این اتفاق اجتناب ناپذیر است باید ایرادات
         بوجود آمده را رفع نماییم
     </li>
-    <li>
+    <li class="coding">
         برای هر Component و Page ای که ایجاد می‌شود حتما موضوع سطح دسترسی بررسی شود (در صورتی که در تسک به آن اشاره نشده
         است پیگیر آن شویم)
     </li>
-    <li>
+    <li class="testing">
         هر بخش از سامانه که در حال طراحی آن هستیم باید در تمامی سایزهای فریم ورک ما (مثلا bootstrap) به درستی نمایش داده
         شود
     </li>
-    <li class="new">
-        هر جایی از سامانه که نیاز به کانکشن HTTP شد باید اسپینر، اسکلتون و یا لودر به کاربر نمایش داده شود و کاربر تا
+    <li class="testing new">
+        هر جایی از سامانه که نیاز به کانکشن HTTP شد باید یکی از موارد اسپینر، اسکلتون و یا لودر به کاربر نمایش داده شود و کاربر تا
         زمان نیامدن پاسخ HTTP کانکشن، امکان تکرار درخواست را نداشته باشد (پیشنهاد: دکمه موقتا تا آمدن پاسخ Disable شود)
+    </li>
+    <li class="coding new">
+        کد یا کامپوننت مورد نظر فقط در صورتی در فولدر Framework قرار بگیرد که در باقی App ها به آن نیاز است.
+    </li>
+    <li class="coding new">
+        برای نام گذاری صفحات، Action Creator ها، Action Type ها، و Reducer از
+        <a href="/standard/naming/react" target="_blank">این لینک</a>
+        استفاده شود.
+    </li>
+    <li class="testing new">
+        در هر جای سامانه که کاربر خواست موردی را حذف کند باید warning به کاربر نمایش داده شود و بعد از تایید آن حذف انجام گیرد.
     </li>
 </ol>
 
@@ -24,19 +35,19 @@
     Page
 </h4>
 <ol class="spaced-list-sm">
-    <li>
+    <li class="testing">
         داشتن تمامی استاندارد سایزهای favicon
     </li>
-    <li>
+    <li class="testing">
         هر صفحه حتما تگ title داشته باشد و در آن ابتدا اسم سایت آمده و بعد از قرار دادن dash سپس عنوان صفحه ذکر شود
     </li>
-    <li>
+    <li class="testing">
         هندل کردن صفحه 404
     </li>
-    <li>
+    <li class="testing">
         در صورت سرور ساید بودن پروژه، هندل کردن صفحه 500
     </li>
-    <li>
+    <li class="testing">
         ریدایرکت به صفحه اصلی در صورت نداشتن دسترسی به صفحه خاص و نمایش Toast به کاربر مبنی بر عدم دسترسی
     </li>
 </ol>
@@ -45,10 +56,10 @@
     Text
 </h4>
 <ol class="spaced-list-sm">
-    <li>
+    <li class="testing">
         هیچ متنی نباید Static و یا به شکل Hard Code باشد مگر این که در تسک بیان شود که این بخش بناس Hard Code باشد
     </li>
-    <li>
+    <li class="testing">
         تمامی متون از فونت پیش‌فرض سامانه استفاده نمایند مگر آنکه دیزاینر برای زیبایی کار برای بخشی از سامانه فونت خاص
         در نظر گیرد
     </li>
@@ -58,10 +69,10 @@
     Link
 </h4>
 <ol class="spaced-list-sm">
-    <li class="new">
+    <li class="testing new">
         حالت هاور داشته باشد (حتما با transition باشد)
     </li>
-    <li>
+    <li class="testing">
         هیچ لینکی نباید Static باشد و هیچ کاری انجام ندهد
     </li>
 </ol>
@@ -70,10 +81,10 @@
     Input
 </h4>
 <ol class="spaced-list-sm">
-    <li>
+    <li class="testing">
         تمام باکس که برای آن در نظر گرفته شده است باید قابل انتخاب و پر کردن محتوا باشد
     </li>
-    <li>
+    <li class="testing">
         حالت اکتیو داشته باشد
     </li>
 </ol>
@@ -82,13 +93,13 @@
     Button
 </h4>
 <ol class="spaced-list-sm">
-    <li class="new">
+    <li class="testing new">
         حالت هاور داشته باشد (حتما با transition باشد)
     </li>
-    <li>
+    <li class="coding">
         در سرتاسر سامانه از یک کامپوننت برای آن استفاده شود
     </li>
-    <li>
+    <li class="testing">
         هیچ دکمه ای نباید Static باشد و هیچ کاری انجام ندهد
     </li>
 </ol>
@@ -97,19 +108,19 @@
     Form
 </h4>
 <ol class="spaced-list-sm">
-    <li>
-        ارور مناسب برای هر فیلد (متن به شکل محترمانه و استفاده از ضمیر سوم شخص)
+    <li class="testing">
+        نمایش ارور مناسب برای هر فیلد در صورت بروز خطا (متن به شکل محترمانه و استفاده از ضمیر سوم شخص)
     </li>
-    <li>
+    <li class="testing">
         هندل کردن Field Error و Non-Field Error ای که از سمت بکند ارسال می‌شود
     </li>
-    <li>
+    <li class="testing">
         تبدیل اعداد فارسی به انگلیسی در فیلدها
     </li>
-    <li>
+    <li class="testing">
         ارسال فرم با زدن دکمه Enter
     </li>
-    <li>
+    <li class="testing">
         بعد از ثبت موفقیت آمیز فرم در فرم‌های ساده Toast و در فرم‌های پیچیده SweetAlert به کاربر نمایش داده شود
     </li>
 </ol>
@@ -118,13 +129,10 @@
     Table
 </h4>
 <ol class="spaced-list-sm">
-    <li>
-        سطر اول که عنوان ستون هاست از باقی سطرها متمایز باشد
+    <li class="testing">
+        برخی از ستون‌ها در حالت ریسپانسیو نمایش داده نشوند ولی در عوض دکمه ای موجود باشد که پس از کلیک بر روی آن به شکل Toggle در زیر سطر نمایش داده شوند
     </li>
-    <li>
-        تعداد ستون های جداول در ریسپانسیو به صورت تاگل باشد
-    </li>
-    <li>
+    <li class="testing">
         محتوای هر سطر بیشتر از دو خط نشود (حتی در حالت ریسپانسیو)
     </li>
 </ol>
@@ -133,10 +141,10 @@
     Header
 </h4>
 <ol class="spaced-list-sm">
-    <li>
+    <li class="testing">
         لوگو در تمام حالات ریسپانسیو، حضور داشته باشد
     </li>
-    <li>
+    <li class="testing">
         با کلیک بر روی لوگو کاربر به صفحه اصلی هدایت شود
     </li>
 </ol>
@@ -145,7 +153,25 @@
     Toast
 </h4>
 <ol class="spaced-list-sm">
-    <li>
+    <li class="testing">
         تمامی Toast ها در سمت چپ بالای صفحه باز شوند
+    </li>
+</ol>
+
+<h4 class="box-title new">
+    Imports
+</h4>
+<ol class="spaced-list-sm">
+    <li class="coding">
+        در import کردن از فولدر Framework همیشه path آن absolute باشد. برای مثال:
+        <code>
+            framework/helpers/constants
+        </code>
+    </li>
+    <li class="coding">
+        در import کردن از App داخلی همیشه path آن relative باشد. برای مثال:
+        <code>
+            ../state/actions
+        </code>
     </li>
 </ol>

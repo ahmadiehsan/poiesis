@@ -3,6 +3,17 @@
     border-color: #5c6ac4;
 }
 
+.btn-outline-primary {
+    color: #5c6ac4;
+    border-color: #5c6ac4;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary.active {
+    background-color: #5c6ac4;
+    border-color: #5c6ac4;
+}
+
 .jq-toast-single {
     font-size: 14px !important;
     text-align: right !important;
