@@ -91,6 +91,14 @@
 
 {% block js %}
     <script>
+        function switchAnalysisMode(switch_to) {
+            if (switch_to === 'on') {
+                document.location = updateQueryStringParameter(window.location.href, 'analysis-mode', 'on');
+            } else if (switch_to === 'off') {
+                document.location = updateQueryStringParameter(window.location.href, 'analysis-mode', 'off');
+            }
+        }
+
         function updateQueryStringParameter(uri, key, value) {
             var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
             var separator = uri.indexOf('?') !== -1 ? "&" : "?";
@@ -98,14 +106,6 @@
                 return uri.replace(re, '$1' + key + "=" + value + '$2');
             } else {
                 return uri + separator + key + "=" + value;
-            }
-        }
-
-        function switchAnalysisMode(switch_to) {
-            if (switch_to === 'on') {
-                document.location = updateQueryStringParameter(window.location.href, 'analysis-mode', 'on');
-            } else if (switch_to === 'off') {
-                document.location = updateQueryStringParameter(window.location.href, 'analysis-mode', 'off');
             }
         }
     </script>
