@@ -5,6 +5,7 @@ variables:
   PROJECT_NAME: "poiesis"
   PROJECT_SERVICE: "poiesis.service"
   PROJECT_DIR: "/ahmadiehsan/app/${PROJECT_NAME}"
+  PROJECT_CFG_FILE: "/ahmadiehsan/etc/${PROJECT_NAME}.conf"
   GITLAB_USERNAME: "ahmadiehsan+deploy-token"
   GITLAB_TOKEN: "xfyGL9FbK8Lf8ofB-NMm"
   GITLAB_URL: "https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@mgit.mparsict.com/ahmadiehsan/${CI_PROJECT_NAME}.git"
@@ -19,6 +20,7 @@ deploy_job:
     - cd ${PROJECT_DIR}
     - git checkout master
     - git pull ${GITLAB_URL} master
+    - export $(xargs < ${PROJECT_CFG_FILE})
     - /ahmadiehsan/app/env_poiesis/bin/pip install -r requirements/prod.txt
     - /ahmadiehsan/app/env_poiesis/bin/python manage.py migrate
     - sudo systemctl restart ${PROJECT_SERVICE}
