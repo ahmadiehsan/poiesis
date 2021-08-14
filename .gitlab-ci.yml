@@ -20,5 +20,5 @@ deploy_job:
     - git checkout master
     - git pull ${GITLAB_URL} master
     - /ahmadiehsan/app/env_poiesis/bin/pip install -r requirements/prod.txt
-    - /ahmadiehsan/app/env_poiesis/school_env/bin/python manage.py migrate
+    - /ahmadiehsan/app/env_poiesis/bin/python manage.py migrate
     - sudo systemctl restart ${PROJECT_SERVICE}
