@@ -185,7 +185,13 @@ class NamingDjangoView(TemplateView, AnalysisFileGeneratorMixin):
 
     @staticmethod
     def _generate_tests(entity):
-        return [f'class {entity}Test'], ''
+        return (
+            [
+                f'class {entity}Test',
+                f'class {entity}TestMixin',
+            ],
+            ''
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
