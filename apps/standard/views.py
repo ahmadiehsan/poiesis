@@ -183,6 +183,10 @@ class NamingDjangoView(TemplateView, AnalysisFileGeneratorMixin):
     def _generate_services(entity):
         return [f'class {entity}Service'], ''
 
+    @staticmethod
+    def _generate_tests(entity):
+        return [f'class {entity}Test'], ''
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -195,6 +199,7 @@ class NamingDjangoView(TemplateView, AnalysisFileGeneratorMixin):
             serializers_names, serializers_help_code = self._generate_serializers(entity)
             validators_names, validators_help_code = self._generate_validators(entity)
             services_names, services_help_code = self._generate_services(entity)
+            tests_names, tests_help_code = self._generate_tests(entity)
 
             context.update({
                 'entity': entity,
@@ -204,6 +209,7 @@ class NamingDjangoView(TemplateView, AnalysisFileGeneratorMixin):
                     'serializers.py': {'names': serializers_names, 'help_code': serializers_help_code},
                     'validators.py': {'names': validators_names, 'help_code': validators_help_code},
                     'services.py': {'names': services_names, 'help_code': services_help_code},
+                    'tests.py': {'names': tests_names, 'help_code': tests_help_code},
                 }
             })
         else:
