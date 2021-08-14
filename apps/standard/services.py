@@ -13,6 +13,10 @@ class AnalysisService:
         self.file.new_line('لطفا توضیح کوتاهی درباره خواسته PO در این تسک وارد نمایید')
 
         self.file.new_line('\n\n')
+        self.file.new_header(level=2, title='تصاویر دیزاین/اسکچ')
+        self.file.new_line('لینک و یا خود تصاویر دیزاین/اسکچ مربوط به تسک را اینجا وارد نمایید')
+
+        self.file.new_line('\n\n')
         self.file.new_header(level=2, title='استاندارد نام گذاری')
 
         self.file.new_line()
