@@ -1,0 +1,24 @@
+stages:
+  - deploy
+
+variables:
+  PROJECT_NAME: "poiesis"
+  PROJECT_SERVICE: "poiesis.service"
+  PROJECT_DIR: "/ahmadiehsan/app/${PROJECT_NAME}"
+  GITLAB_USERNAME: "ahmadiehsan+deploy-token"
+  GITLAB_TOKEN: "xfyGL9FbK8Lf8ofB-NMm"
+  GITLAB_URL: "https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@mgit.mparsict.com/ahmadiehsan/${CI_PROJECT_NAME}.git"
+
+deploy_job:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+  script:
+    - cd ${PROJECT_DIR}
+    - git checkout master
+    - git pull ${GITLAB_URL} master
+    - /ahmadiehsan/app/env_poiesis/bin/pip install -r requirements/prod.txt
+    - /ahmadiehsan/app/env_poiesis/school_env/bin/python manage.py migrate
+    - sudo systemctl restart ${PROJECT_SERVICE}
