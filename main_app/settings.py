@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.user',
 
     'django_node_assets',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

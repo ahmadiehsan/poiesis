@@ -1,0 +1,36 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}
+    استاندارد ساخت تسک
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3 class="text-center mb-4">
+            استاندارد ساخت تسک
+        </h3>
+
+        <div class="col-lg-8 offset-lg-2">
+            <div class="alert alert-primary">
+                با کلیک بر روی دکمه دانلود فایل تسک، یک فایل در سیستم شما دانلود خواهد شد
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                            <div class="form-check">
+                                {% include 'main_app/_input_horizontal.html' with field=field %}
+                            </div>
+                        {% endfor %}
+
+                        <input type="submit" value="دانلود فایل تسک" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

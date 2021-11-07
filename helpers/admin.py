@@ -16,7 +16,7 @@ class BaseAdmin(admin.ModelAdmin):
 
     def get_fieldsets(self, request, obj=None):
         fieldsets = super().get_fieldsets(request, obj)
-        fieldsets += (_('other data'), {
+        fieldsets += (_('Other Data'), {
             'fields': (
                 'create_time',
                 'modify_time',

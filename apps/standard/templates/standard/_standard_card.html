@@ -1,37 +1,23 @@
 {% load static %}
 
 <div class="card mb-4" onclick="showPulse(this)">
-    <img src="{% static image_address %}" class="card-img-top" alt="react">
+    <img src="{% static standard.image_address %}" class="card-img-top" alt="{{ standard.title }}">
     <div class="card-body">
         <h5 class="card-title">
-            {{ title }}
+            {{ standard.title }}
         </h5>
         <p class="card-text">
             استانداردهای
-            {{ title }}
+            {{ standard.title }}
             برای:
         </p>
 
-        {% if naming_url_name %}
-            <a href="{% url naming_url_name %}?analysis-mode=on" class="btn btn-primary btn-sm">
-                تحلیل
+        {% for link in standard.links %}
+            <a href="{{ link.url }}" class="btn btn-primary btn-sm">
+                {{ link.title }}
                 <span class="pulse"></span>
             </a>
-        {% endif %}
-
-        {% if naming_url_name %}
-            <a href="{% url naming_url_name %}" class="btn btn-primary btn-sm">
-                نام گذاری
-                <span class="pulse"></span>
-            </a>
-        {% endif %}
-
-        {% if rules_url_name %}
-            <a href="{% url rules_url_name %}" class="btn btn-primary btn-sm">
-                کد و تست
-                <span class="pulse"></span>
-            </a>
-        {% endif %}
+        {% endfor %}
     </div>
 </div>
 

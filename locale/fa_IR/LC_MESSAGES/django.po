@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-06 18:41+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/standard/enums.py:6
+msgid "Task description"
+msgstr "توضیحات تسک"
+
+#: apps/standard/enums.py:7
+msgid "Zeppelin file links"
+msgstr "لینک فایل طرح zeppelin"
+
+#: apps/standard/enums.py:8
+msgid "Task permissions"
+msgstr "دسترسی های تسک"
+
+#: apps/standard/enums.py:9
+msgid "Inputs value"
+msgstr "مقدارهای ورودی"
+
+#: apps/standard/enums.py:10
+msgid "Inputs type"
+msgstr "نوع ورودی ها"
+
+#: apps/standard/enums.py:11
+msgid "Related tasks"
+msgstr "تسک های درگیر شده"
+
+#: apps/standard/enums.py:12
+msgid "Backend description"
+msgstr "ملاحظات بک اندی"
+
+#: apps/standard/enums.py:13
+msgid "Frontend description"
+msgstr "ملاحظات فرانتی"
+
+#: apps/standard/enums.py:14
+msgid "Test cases"
+msgstr "تست کیس‌ها"
+
+#: apps/standard/forms.py:8
+msgid "Task Title"
+msgstr "عنوان تسک"
+
+#: apps/standard/forms.py:10
+msgid "Task Choices"
+msgstr "گزینه های تسک"
+
+#: apps/standard/models.py:9 apps/standard/views.py:24
+msgid "React"
+msgstr "ری‌اکت"
+
+#: apps/standard/models.py:10 apps/standard/views.py:42
+msgid "Django"
+msgstr "جنگو"
+
+#: apps/standard/models.py:11 apps/standard/views.py:60
+msgid "PO"
+msgstr "مالک محصول"
+
+#: apps/standard/models.py:13
+msgid "Title"
+msgstr "عنوان"
+
+#: apps/standard/models.py:14
+msgid "Rule Type"
+msgstr "نوع قانون"
+
+#: apps/standard/models.py:20
+msgid "Rule Topic"
+msgstr "موضوع قانون"
+
+#: apps/standard/models.py:21
+msgid "Rule Topics"
+msgstr "موضوعات قانون"
+
+#: apps/standard/models.py:26
+msgid "Coding"
+msgstr "کدنویسی"
+
+#: apps/standard/models.py:27
+msgid "Testing"
+msgstr "تست"
+
+#: apps/standard/models.py:29
+msgid "Item Type"
+msgstr "نوع گزینه"
+
+#: apps/standard/models.py:30
+msgid "Content"
+msgstr "محتوا"
+
+#: apps/standard/models.py:31
+msgid "Is New"
+msgstr "جدید است؟"
+
+#: apps/standard/models.py:32
+msgid "Topic"
+msgstr "موضوع"
+
+#: apps/standard/models.py:38
+msgid "Rule Item"
+msgstr "گزینه قانون"
+
+#: apps/standard/models.py:39
+msgid "Rule Items"
+msgstr "گزینه‌های قانون"
+
+#: apps/standard/views.py:28 apps/standard/views.py:46
+msgid "Analysis"
+msgstr "تحلیل"
+
+#: apps/standard/views.py:32 apps/standard/views.py:50
+msgid "Naming"
+msgstr "نام‌گذاری"
+
+#: apps/standard/views.py:36 apps/standard/views.py:54
+msgid "Code and test"
+msgstr "کد و تست"
+
+#: apps/standard/views.py:64
+msgid "Negative Point"
+msgstr "نمره منفی"
+
+#: apps/standard/views.py:68
+msgid "Task"
+msgstr "تسک"
+
+#: helpers/admin.py:19
+msgid "Other Data"
+msgstr "دیگر اطلاعات"
+
+#: helpers/models.py:9
+msgid "Create Time"
+msgstr "زمان ساخت"
+
+#: helpers/models.py:10
+msgid "Modify Time"
+msgstr "زمان ویرایش"
+
+#: helpers/models.py:11
+msgid "Is Deleted"
+msgstr "پاک شده است؟"
