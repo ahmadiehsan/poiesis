@@ -50,8 +50,7 @@
                                 {% for rule_item in rule_topic.items.all %}
                                     <li
                                             id="{{ rule_item.id }}"
-                                            class="item_type_
-                                                    {{ rule_item.item_type }}{% if rule_item.is_new %} new{% endif %}"
+                                            class="item_type_{{ rule_item.item_type }}{% if rule_item.is_new %} new{% endif %}"
                                     >
                                         <a href="#{{ rule_item.id }}" class="index-link">
                                             <span class="fa fa-link"></span>
