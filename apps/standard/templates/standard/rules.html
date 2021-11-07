@@ -9,20 +9,37 @@
 {% block content %}
     <div class="container">
         <h3 class="text-center mb-4">
-            {{ title_fa }} - {{ title_en }}
-            <span class="text-muted fs-5">(کدنویسی و تست)</span>
+            {{ title_fa }}
+            {% if title_en %}
+                - {{ title_en }}
+            {% endif %}
+            {% if description %}
+                <span class="text-muted fs-5">{{ description }}</span>
+            {% endif %}
 
-            <div class="mt-3">
-                <div class="btn-group filter-btns">
-                    <button onclick="doFilter(this, 'all')" class="btn btn-outline-primary active">همه</button>
-                    <button onclick="doFilter(this, 'coding')" class="btn btn-outline-primary">قوانین کد نویسی</button>
-                    <button onclick="doFilter(this, 'testing')" class="btn btn-outline-primary">قوانین تست</button>
+            {% if activate_filter %}
+                <div class="mt-3">
+                    <div class="btn-group filter-btns">
+                        <button onclick="doFilter(this, 'all')" class="btn btn-outline-primary active">همه</button>
+                        <button onclick="doFilter(this, 'item_type_1')" class="btn btn-outline-primary">
+                            قوانین کد نویسی
+                        </button>
+                        <button onclick="doFilter(this, 'item_type_2')" class="btn btn-outline-primary">
+                            قوانین تست
+                        </button>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </h3>
 
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
+                {% if help_image %}
+                    <div class="text-center">
+                        <img class="img-fluid img-thumbnail mb-3" src="{% static help_image %}" alt="helper image">
+                    </div>
+                {% endif %}
+
                 <div class="card shadow-sm">
                     <div class="card-body page-content">
                         {% for rule_topic in rule_topics %}
@@ -33,7 +50,8 @@
                                 {% for rule_item in rule_topic.items.all %}
                                     <li
                                             id="{{ rule_item.id }}"
-                                            class="{{ rule_item.get_item_type_display }} {% if rule_item.is_new %}new{% endif %}"
+                                            class="item_type_
+                                                    {{ rule_item.item_type }}{% if rule_item.is_new %} new{% endif %}"
                                     >
                                         <a href="#{{ rule_item.id }}" class="index-link">
                                             <span class="fa fa-link"></span>
@@ -57,14 +75,14 @@
             $(element).addClass('active');
 
             if (entry === 'all') {
-                $('.page-content li.coding').removeClass('d-none');
-                $('.page-content li.testing').removeClass('d-none');
-            } else if (entry === 'coding') {
-                $('.page-content li.testing').addClass('d-none');
-                $('.page-content li.coding').removeClass('d-none');
-            } else if (entry === 'testing') {
-                $('.page-content li.testing').removeClass('d-none');
-                $('.page-content li.coding').addClass('d-none');
+                $('.page-content li.item_type_1').removeClass('d-none');
+                $('.page-content li.item_type_2').removeClass('d-none');
+            } else if (entry === 'item_type_1') {
+                $('.page-content li.item_type_2').addClass('d-none');
+                $('.page-content li.item_type_1').removeClass('d-none');
+            } else if (entry === 'item_type_2') {
+                $('.page-content li.item_type_2').removeClass('d-none');
+                $('.page-content li.item_type_1').addClass('d-none');
             }
 
             for (const boxTitleElement of $('.box-title')) {

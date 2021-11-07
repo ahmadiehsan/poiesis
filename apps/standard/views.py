@@ -2,14 +2,78 @@ import re
 from copy import deepcopy
 
 from django.http import HttpResponse
-from django.views.generic import TemplateView
+from django.urls import reverse, reverse_lazy
+from django.utils.translation import ugettext as _
+from django.views.generic import TemplateView, FormView
 
+from .enums import TaskPOChoices
+from .forms import TaskPOForm
 from .models import RuleTopic
-from .services import AnalysisService
+from .services import MarkdownService
 
 
-class SelectFrameworkView(TemplateView):
-    template_name = 'standard/select_framework.html'
+class SelectStandardView(TemplateView):
+    template_name = 'standard/select_standard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context.update({
+            'standards': [
+                {
+                    'title': _('React'),
+                    'image_address': 'standard/images/react.jpg',
+                    'links': [
+                        {
+                            'title': _('Analysis'),
+                            'url': f"{reverse('standard:naming-react')}?analysis-mode=on"
+                        },
+                        {
+                            'title': _('Naming'),
+                            'url': reverse('standard:naming-react')
+                        },
+                        {
+                            'title': _('Code and test'),
+                            'url': reverse('standard:rules-react')
+                        },
+                    ],
+                },
+                {
+                    'title': _('Django'),
+                    'image_address': 'standard/images/django.jpg',
+                    'links': [
+                        {
+                            'title': _('Analysis'),
+                            'url': f"{reverse('standard:naming-django')}?analysis-mode=on"
+                        },
+                        {
+                            'title': _('Naming'),
+                            'url': reverse('standard:naming-django')
+                        },
+                        {
+                            'title': _('Code and test'),
+                            'url': reverse('standard:rules-django')
+                        },
+                    ],
+                },
+                {
+                    'title': _('PO'),
+                    'image_address': 'standard/images/po.jpg',
+                    'links': [
+                        {
+                            'title': _('Negative Point'),
+                            'url': reverse('standard:rules-po')
+                        },
+                        {
+                            'title': _('Task'),
+                            'url': reverse('standard:task-po')
+                        },
+                    ],
+                },
+            ]
+        })
+
+        return context
 
 
 class AnalysisFileGeneratorMixin:
@@ -17,6 +81,40 @@ class AnalysisFileGeneratorMixin:
         data = deepcopy(request.POST)
         del data['csrfmiddlewaretoken']
         return data
+
+    @staticmethod
+    def _generate_md_file(standard_table_content, standard_dict):
+        md_service = MarkdownService(file_name='analysis')
+        md_service.file.new_header(level=1, title='عنوان تحلیل را اینجا وارد نمایید')
+
+        md_service.file.new_line('\n')
+        md_service.file.new_header(level=2, title='استاندارد نام گذاری')
+
+        md_service.file.new_line()
+        md_service.file.new_table(
+            columns=2,
+            rows=int(len(standard_table_content) / 2),
+            text=standard_table_content,
+            text_align='center'
+        )
+
+        md_service.file.new_line('\n')
+        md_service.file.new_header(level=2, title='توضیح هر سطر جدول')
+
+        for scope in standard_dict:
+            md_service.file.new_header(level=3, title=scope)
+            md_service.file.new_list(standard_dict[scope])
+            md_service.file.new_line('توضیحات این بخش را اینجا وارد نمایید')
+            md_service.file.new_line('\n\n')
+
+        md_service.file.new_header(level=2, title='ابهامات')
+        md_service.file.new_line('در صورت وجود ابهام و یا سوالی آنرا اینجا وارد نمایید')
+
+        md_service.file.new_line('\n\n')
+        md_service.file.new_header(level=2, title='دیگر توضیحات')
+        md_service.file.new_line('هر توضیح دیگری که در قالب بالا جا نمی‌گیرد را اینجا وارد نمایید')
+
+        return md_service
 
     def post(self, request):
         standard_table_content = ['فایل/مفهوم', 'مقدار']
@@ -26,11 +124,10 @@ class AnalysisFileGeneratorMixin:
                 standard_table_content.extend([scope, value])
                 standard_dict.setdefault(scope, []).append(value)
 
-        service = AnalysisService()
-        service.fill_file_with_default_content(standard_table_content, standard_dict)
+        md_service = self._generate_md_file(standard_table_content, standard_dict)
 
         response = HttpResponse(
-            service.read_file(),
+            md_service.read_file(),
             content_type='text/markdown',
             headers={'Content-Disposition': f'attachment; filename="analysis_{request.GET["entity"]}.md"'},
         )
@@ -240,7 +337,9 @@ class RulesReactView(TemplateView):
         context.update({
             'title_en': 'React',
             'title_fa': 'ری‌اکت',
-            'rule_topics': RuleTopic.objects.filter(framework=RuleTopic.Framework.REACT)
+            'description': '(کدنویسی و تست)',
+            'activate_filter': True,
+            'rule_topics': RuleTopic.objects.filter(rule_type=RuleTopic.RuleType.REACT)
         })
         return context
 
@@ -253,6 +352,43 @@ class RulesDjangoView(TemplateView):
         context.update({
             'title_en': 'Django',
             'title_fa': 'جنگو',
-            'rule_topics': RuleTopic.objects.filter(framework=RuleTopic.Framework.DJANGO)
+            'description': '(کدنویسی و تست)',
+            'activate_filter': True,
+            'rule_topics': RuleTopic.objects.filter(rule_type=RuleTopic.RuleType.DJANGO)
         })
         return context
+
+
+class RulesPOView(TemplateView):
+    template_name = 'standard/rules.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'title_fa': 'نمره منفی',
+            'activate_filter': False,
+            'help_image': 'standard/images/po_rules.png',
+            'rule_topics': RuleTopic.objects.filter(rule_type=RuleTopic.RuleType.PO)
+        })
+        return context
+
+
+class TaskPOView(FormView):
+    template_name = 'standard/task.html'
+    form_class = TaskPOForm
+    success_url = reverse_lazy('standard:task-po')
+
+    def form_valid(self, form):
+        md_service = MarkdownService(file_name='task', title=form.data['task_title'])
+
+        for task_choice in form.data.getlist('task_choices'):
+            md_service.file.new_header(level=2, title=dict(TaskPOChoices.choices)[int(task_choice)])
+            md_service.file.new_line('توضیحات این بخش را اینجا وارد نمایید')
+            md_service.file.new_line('\n\n')
+
+        response = HttpResponse(
+            md_service.read_file(),
+            content_type='text/markdown',
+            headers={'Content-Disposition': f'attachment; filename="task.md"'},
+        )
+        return response

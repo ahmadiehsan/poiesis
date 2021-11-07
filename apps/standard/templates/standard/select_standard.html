@@ -1,0 +1,18 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}
+    انتخاب استاندارد
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for standard in standards %}
+                <div class="col-sm-6 col-lg-3">
+                    {% include 'standard/_standard_card.html' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

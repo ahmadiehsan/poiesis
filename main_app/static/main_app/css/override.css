@@ -1,3 +1,4 @@
+/* Bootstrap */
 .btn-primary {
     background-color: #5c6ac4;
     border-color: #5c6ac4;
@@ -14,6 +15,8 @@
     border-color: #5c6ac4;
 }
 
+
+/* Notification */
 .jq-toast-single {
     font-size: 14px !important;
     text-align: right !important;
@@ -22,4 +25,28 @@
 .close-jq-toast-single {
     right: auto !important;
     left: 7px !important;
+}
+
+
+/* Form */
+.errorlist {
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #f5c2c7;
+    border-radius: .25rem;
+    color: #842029;
+    background-color: #f8d7da;
+}
+
+.radio-control {
+    list-style-type: none;
+    padding: 0;
+}
+
+label.required::after {
+    content: "*";
+    padding-left: 5px;
+    color: red;
 }
