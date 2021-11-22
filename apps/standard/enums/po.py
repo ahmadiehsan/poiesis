@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 
-class TaskPOChoices(models.IntegerChoices):
+class POTaskChoices(models.IntegerChoices):
     task_description = 1, _('Task description'),  # توضیحات کامل تسک
     zeppelin_file_links = 2, _('Zeppelin file links'),  # لینک فایل طرح zeppelin
     permissions = 3, _('Task permissions'),  # دسترسی ها
