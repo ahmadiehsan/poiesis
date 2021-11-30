@@ -28,7 +28,6 @@ class DjangoNamingView(TemplateView, AnalysisFileGeneratorMixin):
                 f'class {entity}Serializer',
                 f'class {entity}ListSerializer',
                 f'class {entity}MinimalSerializer',
-                f'class {entity}ReadOnlySerializer',
             ],
             ''
         )
