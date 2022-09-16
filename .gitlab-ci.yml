@@ -18,8 +18,11 @@ deploy_job:
     - if: '$CI_COMMIT_BRANCH == "master"'
   script:
     - cd ${PROJECT_DIR}
+    - git remote set-url origin ${GITLAB_URL}
+    - git reset --hard
+    - git fetch -p
     - git checkout master
-    - git pull ${GITLAB_URL} master
+    - git pull origin master
     - export $(xargs < ${PROJECT_CFG_FILE})
     - /ahmadiehsan/app/env_poiesis/bin/pip install -r requirements/prod.txt
     - /ahmadiehsan/app/env_poiesis/bin/python manage.py migrate
